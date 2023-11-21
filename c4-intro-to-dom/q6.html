@@ -54,12 +54,15 @@
       select {
         width: 8rem;
       }
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
 
   <body>
     <h1>BOOK MY SHOW</h1>
-    <select>
+    <select id="select">
       <option value="none">None</option>
       <option value="action">Action</option>
       <option value="romance">Romance</option>
@@ -108,6 +111,24 @@
     </div>
     <script>
       // Q Make the filter work
+      const selectElement = document.getElementById("select");
+      selectElement.addEventListener("change", () => {
+        const containerElements = document.querySelectorAll(".movies");
+        for (let i = 0; i < containerElements.length; i++) {
+          if (selectElement.value === "none") {
+            containerElements[i].classList.remove("hidden");
+          } else {
+            containerElements[i].classList.add("hidden");
+          }
+        }
+        const sampleElements = document.querySelectorAll(
+          `[data-category=${selectElement.value}]`
+        );
+        for (let i = 0; i < sampleElements.length; i++) {
+          const parentElementWithChild = sampleElements[i].closest(".movies");
+          parentElementWithChild.classList.remove("hidden");
+        }
+      });
     </script>
   </body>
 </html>
