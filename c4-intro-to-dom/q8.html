@@ -7,13 +7,22 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="doubleHolder">
+    <div id="container">
       <button class="double">double</button>
     </div>
 
     <script>
       //    Q Create a button that is destroyed by clicking on it but two new buttons are created in it's place.
-
+      const mainButton = document.querySelector(".double");
+      const containerElement = document.getElementById("container");
+      mainButton.addEventListener("click", () => {
+        mainButton.style.display = "none";
+        for (let i = 0; i < 2; i++) {
+          buttonElement = document.createElement("button");
+          buttonElement.textContent = "single";
+          containerElement.append(buttonElement);
+        }
+      });
     </script>
   </body>
 </html>
