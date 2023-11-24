@@ -34,6 +34,15 @@
       //its alerted that red is clicked. Fix it
 
       // Fix the code -
+      const redElement = document.querySelector(".red");
+      const yellowElement = document.querySelector(".yellow");
+      redElement.addEventListener("click", () => {
+        console.log("clicked on red");
+      });
+      yellowElement.addEventListener("click", (e) => {
+        e.stopPropagation();
+        console.log("clicked on yellow");
+      });
     </script>
   </body>
 </html>
