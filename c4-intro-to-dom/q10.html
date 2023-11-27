@@ -8,7 +8,7 @@
   </head>
   <body>
     <button id="all">Remove All</button>
-    <ul>
+    <ul id="list-container">
       <li>
         <p>Task - 1</p>
         <button>delete</button>
@@ -27,12 +27,32 @@
       </li>
     </ul>
     <script>
-      // Q- Make remove all button work  and make individual delete btn work 
+      // Q- Make remove all button work  and make individual delete btn work
       //   Solution:
 
-      
+      const removeAllBtn = document.getElementById("all");
+      const mainList = document.getElementById("list-container");
+      const validChildNodes = [];
 
-       
+      removeAllBtn.addEventListener("click", () => {
+        while (mainList.contains(mainList.firstElementChild)) {
+          mainList.removeChild(mainList.firstElementChild);
+        }
+      });
+
+      let modifiedArr = Array.from(mainList.childNodes);
+      let filteredArray = modifiedArr.filter(function (node) {
+        return !(node instanceof Text && node.nodeType === 3);
+      });
+
+      for (let i = 0; i < filteredArray.length; i++) {
+        const element = filteredArray[i];
+        element.lastElementChild.addEventListener("click", () => {
+          let childButtonElement = element.lastElementChild;
+          // element.parentNode returns the immediate parent node of a child node
+          mainList.removeChild(childButtonElement.parentNode);
+        });
+      }
     </script>
   </body>
 </html>
